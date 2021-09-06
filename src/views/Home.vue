@@ -2,7 +2,11 @@
   <div class="home">
     <div class="container">
       <el-container style="height: 500px">
-        <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
+        <el-aside
+          class="home-aside"
+          width="200px"
+          style="background-color: rgb(238, 241, 246)"
+        >
           <el-menu :default-openeds="['1', '3']">
             <el-submenu index="1">
               <template slot="title"
@@ -59,7 +63,7 @@
         </el-aside>
 
         <el-container class="guest-content">
-          <!-- <el-header
+          <el-header
             class="guest-nav"
             style="text-align: right; font-size: 12px"
           >
@@ -72,19 +76,48 @@
               </el-dropdown-menu>
             </el-dropdown>
             <span @click="addGuest">Add guest</span>
-          </el-header> -->
+          </el-header>
 
           <el-main>
-            <el-table :data="tableData">
-              <el-table-column prop="name" label="Name" width="140">
-              </el-table-column>
-              <el-table-column prop="id" label="Id" width="120">
-              </el-table-column>
-              <el-table-column prop="startedAt" label="StartedAt">
-              </el-table-column>
-              <el-table-column prop="endAt" label="EndAt"> </el-table-column>
-              <el-table-column prop="phone" label="Phone"> </el-table-column>
-            </el-table>
+            <div class="demo-input-size">
+              <el-input
+                size="mini"
+                placeholder="Please input your name"
+                accept="text"
+                v-model="input1"
+              >
+              </el-input>
+              <el-input
+                size="mini"
+                placeholder="Please input yuour ID"
+                accept="number"
+                v-model="input2"
+              >
+              </el-input>
+              <el-input
+                size="mini"
+                placeholder="started at"
+                type="datetime-local"
+                v-model="input3"
+              >
+              </el-input>
+              <el-input
+                size="mini"
+                placeholder="endind at"
+                type="datetime-local"
+                v-model="input4"
+              >
+              </el-input>
+              <el-input
+                size="mini"
+                placeholder="Telephone number"
+                accept="number"
+                v-model="input5"
+              >
+              </el-input>
+              <i class="el-icon-edit">Edit</i>
+              <i class="el-icon-delete">Delete</i>
+            </div>
           </el-main>
         </el-container>
       </el-container>
@@ -98,13 +131,13 @@ export default {
   name: "Home",
   components: {},
   data() {
-    const item = {
-      date: "2016-05-02",
-      name: "Tom",
-      address: "No. 189, Grove St, Los Angeles",
-    };
     return {
-      tableData: Array(20).fill(item),
+      user: {
+        input1: "",
+        input2: "",
+        input3: "",
+        input4: "",
+      },
     };
   },
   methods: {
@@ -117,31 +150,4 @@ export default {
 
 <style lang="scss">
 @import "./src/assets/scss/vendors/home.scss";
-
-.container { 
-  el-aside { 
-    border: 1px solid rgba(245, 245, 245, 0.804);
-    border-radius: 10px;
-  }
-}
-
-.guest-content {
-  margin: 0 5px;
-  padding: 0 5px;
-  border: 1px solid rgba(245, 245, 245, 0.804);
-  border-radius: 8px;
-
-  .guest-nav {
-    height: 41px !important;
-    line-height: 43px !important;
-    text-align: right;
-    font-size: 12px;
-    margin-top: 10px;
-    border-radius: inherit;
-
-    span:hover {
-      color:whitesmoke;
-    }
-  }
-}
 </style>
