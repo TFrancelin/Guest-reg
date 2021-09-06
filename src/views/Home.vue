@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <div class="content">
-      <el-container style="height: 500px; border: 1px solid #eee">
+    <div class="container">
+      <el-container style="height: 500px">
         <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
           <el-menu :default-openeds="['1', '3']">
             <el-submenu index="1">
@@ -58,8 +58,11 @@
           </el-menu>
         </el-aside>
 
-        <el-container>
-          <el-header style="text-align: right; font-size: 12px">
+        <el-container class="guest-content">
+          <!-- <el-header
+            class="guest-nav"
+            style="text-align: right; font-size: 12px"
+          >
             <el-dropdown>
               <i class="el-icon-setting" style="margin-right: 15px"></i>
               <el-dropdown-menu slot="dropdown">
@@ -68,21 +71,19 @@
                 <el-dropdown-item>Delete</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
-            <span>Tom</span>
-          </el-header>
+            <span @click="addGuest">Add guest</span>
+          </el-header> -->
 
           <el-main>
             <el-table :data="tableData">
-              <el-table-column prop="date" label="Date" width="140">
+              <el-table-column prop="name" label="Name" width="140">
               </el-table-column>
-              <el-table-column prop="name" label="Name" width="120">
+              <el-table-column prop="id" label="Id" width="120">
               </el-table-column>
-              <el-table-column prop="address" label="Address">
+              <el-table-column prop="startedAt" label="StartedAt">
               </el-table-column>
-              <el-table-column prop="address" label="Address">
-              </el-table-column>
-              <el-table-column prop="address" label="Address">
-              </el-table-column>
+              <el-table-column prop="endAt" label="EndAt"> </el-table-column>
+              <el-table-column prop="phone" label="Phone"> </el-table-column>
             </el-table>
           </el-main>
         </el-container>
@@ -106,10 +107,41 @@ export default {
       tableData: Array(20).fill(item),
     };
   },
-  methods: {},
+  methods: {
+    addGuest() {
+      console.log("guest added");
+    },
+  },
 };
 </script>
 
 <style lang="scss">
 @import "./src/assets/scss/vendors/home.scss";
+
+.container { 
+  el-aside { 
+    border: 1px solid rgba(245, 245, 245, 0.804);
+    border-radius: 10px;
+  }
+}
+
+.guest-content {
+  margin: 0 5px;
+  padding: 0 5px;
+  border: 1px solid rgba(245, 245, 245, 0.804);
+  border-radius: 8px;
+
+  .guest-nav {
+    height: 41px !important;
+    line-height: 43px !important;
+    text-align: right;
+    font-size: 12px;
+    margin-top: 10px;
+    border-radius: inherit;
+
+    span:hover {
+      color:whitesmoke;
+    }
+  }
+}
 </style>
