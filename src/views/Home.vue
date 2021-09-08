@@ -83,25 +83,28 @@
               <el-input
                 size="small"
                 placeholder="Please input your name"
-                accept="text"
-                v-model="input1"
+                type="text"
+                v-model="user.name"
+                clearable="true"
               >
               </el-input>
               <el-input
                 size="small"
                 placeholder="Please input yuour ID"
-                accept="number"
-                v-model="input2"
+                type="number"
+                v-model="user.idNumber"
+                clearable="true"
               >
               </el-input>
               <div class="block">
                 <el-date-picker
                   size="small"
-                  v-model="value1"
+                  v-model="user.datetime"
                   type="datetimerange"
                   range-separator="To"
                   start-placeholder="Start date"
                   end-placeholder="End date"
+                  clearable="true"
                 >
                 </el-date-picker>
               </div>
@@ -109,11 +112,14 @@
                 size="small"
                 placeholder="Telephone number"
                 accept="number"
-                v-model="input5"
+                v-model="user.telephone"
+                clearable="true"
               >
               </el-input>
-              <i class="el-icon-edit" color="#1e90ff">Edit</i>
-              <i class="el-icon-delete" color="#ff0000">Delete</i>
+              <i class="el-icon-edit" @click="edit" color="#1e90ff">Edit</i>
+              <i class="el-icon-delete" @click="remove" color="#ff0000"
+                >Delete</i
+              >
             </div>
           </el-main>
         </el-container>
@@ -130,11 +136,10 @@ export default {
   data() {
     return {
       user: {
-        input1: "",
-        input2: "",
-        input3: "",
-        input4: "",
-        value1: [
+        name: "",
+        idNumber: "",
+        telephone: "",
+        datetime: [
           new Date(2000, 10, 10, 10, 10),
           new Date(2000, 10, 11, 10, 10),
         ],
@@ -144,7 +149,53 @@ export default {
   methods: {
     addGuest() {
       console.log("guest added");
+      const div = document.createElement("div");
+      div.innerHTML = `<el-input
+                size="small"
+                placeholder="Please input your name"
+                type="text"
+                v-model="user.name"
+                clearable="true"
+              >
+              </el-input>
+              <el-input
+                size="small"
+                placeholder="Please input yuour ID"
+                type="number"
+                v-model="user.idNumber"
+                clearable="true"
+              >
+              </el-input>
+              <div class="block">
+                <el-date-picker
+                  size="small"
+                  v-model="user.datetime"
+                  type="datetimerange"
+                  range-separator="To"
+                  start-placeholder="Start date"
+                  end-placeholder="End date"
+                  clearable="true"
+                >
+                </el-date-picker>
+              </div>
+              <el-input
+                size="small"
+                placeholder="Telephone number"
+                accept="number"
+                v-model="user.telephone"
+                clearable="true"
+              >
+              </el-input>
+              <i class="el-icon-edit" @click="edit" color="#1e90ff">Edit</i>
+              <i class="el-icon-delete" @click="remove" color="#ff0000"
+                >Delete</i
+              >`;
+      // el-main.insertBefore(div, el-main.children[0]);
     },
+
+    edit() {},
+
+    remove() {},
   },
 };
 </script>

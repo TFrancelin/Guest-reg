@@ -39,10 +39,14 @@
 .demo-input-size {
   display: flex;
 
-  el-input {
+  .elInput {
     flex: 1;
     justify-content: space-between !important;
     margin: 0 5px !important;
+
+    .el-input__icon {
+      height: 10px !important;
+    }
   }
 
   i{
