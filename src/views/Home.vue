@@ -81,42 +81,39 @@
           <el-main>
             <div class="demo-input-size">
               <el-input
-                size="mini"
+                size="small"
                 placeholder="Please input your name"
                 accept="text"
                 v-model="input1"
               >
               </el-input>
               <el-input
-                size="mini"
+                size="small"
                 placeholder="Please input yuour ID"
                 accept="number"
                 v-model="input2"
               >
               </el-input>
+              <div class="block">
+                <el-date-picker
+                  size="small"
+                  v-model="value1"
+                  type="datetimerange"
+                  range-separator="To"
+                  start-placeholder="Start date"
+                  end-placeholder="End date"
+                >
+                </el-date-picker>
+              </div>
               <el-input
-                size="mini"
-                placeholder="started at"
-                type="datetime-local"
-                v-model="input3"
-              >
-              </el-input>
-              <el-input
-                size="mini"
-                placeholder="endind at"
-                type="datetime-local"
-                v-model="input4"
-              >
-              </el-input>
-              <el-input
-                size="mini"
+                size="small"
                 placeholder="Telephone number"
                 accept="number"
                 v-model="input5"
               >
               </el-input>
-              <i class="el-icon-edit">Edit</i>
-              <i class="el-icon-delete">Delete</i>
+              <i class="el-icon-edit" color="#1e90ff">Edit</i>
+              <i class="el-icon-delete" color="#ff0000">Delete</i>
             </div>
           </el-main>
         </el-container>
@@ -137,6 +134,10 @@ export default {
         input2: "",
         input3: "",
         input4: "",
+        value1: [
+          new Date(2000, 10, 10, 10, 10),
+          new Date(2000, 10, 11, 10, 10),
+        ],
       },
     };
   },
