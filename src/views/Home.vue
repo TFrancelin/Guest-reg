@@ -90,9 +90,9 @@
               </el-input>
               <el-input
                 size="small"
-                placeholder="Please input yuour ID"
+                placeholder="Please input your ID"
                 type="number"
-                v-model="user.idNumber"
+                v-model="user.id_number"
                 clearable="true"
               >
               </el-input>
@@ -116,12 +116,11 @@
                 clearable="true"
               >
               </el-input>
-              <i class="el-icon-edit" @click="edit" color="#1e90ff">Edit</i>
-              <i class="el-icon-delete" @click="remove" color="#ff0000"
-                >Delete</i
-              >
+              <i class="el-icon-edit" @click="edit" color="#1e90ff">修改</i>
+              <i class="el-icon-delete" @click="remove" color="#ff0000">删除</i>
             </div>
           </el-main>
+          <p>{{ user.id_number }}</p>
         </el-container>
       </el-container>
     </div>
@@ -137,7 +136,7 @@ export default {
     return {
       user: {
         name: "",
-        idNumber: "",
+        id_number: "",
         telephone: "",
         datetime: [
           new Date(2000, 10, 10, 10, 10),
