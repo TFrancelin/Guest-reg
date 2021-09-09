@@ -10,55 +10,22 @@
           <el-menu :default-openeds="['1', '3']">
             <el-submenu index="1">
               <template slot="title"
-                ><i class="el-icon-message"></i>Navigator One</template
+                ><i class="el-icon-message"></i>领航员</template
               >
               <el-menu-item-group>
-                <template slot="title">Group 1</template>
-                <el-menu-item index="1-1">Option 1</el-menu-item>
-                <el-menu-item index="1-2">Option 2</el-menu-item>
+                <template slot="title">组 1</template>
+                <el-menu-item index="1-1">选项 1</el-menu-item>
+                <el-menu-item index="1-2">选项 2</el-menu-item>
               </el-menu-item-group>
               <el-menu-item-group title="Group 2">
-                <el-menu-item index="1-3">Option 3</el-menu-item>
+                <el-menu-item index="1-3">选项 3</el-menu-item>
               </el-menu-item-group>
               <el-submenu index="1-4">
-                <template slot="title">Option4</template>
-                <el-menu-item index="1-4-1">Option 4-1</el-menu-item>
+                <template slot="title">选项 4</template>
+                <el-menu-item index="1-4-1">选项 4-1</el-menu-item>
               </el-submenu>
             </el-submenu>
-            <el-submenu index="2">
-              <template slot="title"
-                ><i class="el-icon-menu"></i>Navigator Two</template
-              >
-              <el-menu-item-group>
-                <template slot="title">Group 1</template>
-                <el-menu-item index="2-1">Option 1</el-menu-item>
-                <el-menu-item index="2-2">Option 2</el-menu-item>
-              </el-menu-item-group>
-              <el-menu-item-group title="Group 2">
-                <el-menu-item index="2-3">Option 3</el-menu-item>
-              </el-menu-item-group>
-              <el-submenu index="2-4">
-                <template slot="title">Option 4</template>
-                <el-menu-item index="2-4-1">Option 4-1</el-menu-item>
-              </el-submenu>
-            </el-submenu>
-            <el-submenu index="3">
-              <template slot="title"
-                ><i class="el-icon-setting"></i>Navigator Three</template
-              >
-              <el-menu-item-group>
-                <template slot="title">Group 1</template>
-                <el-menu-item index="3-1">Option 1</el-menu-item>
-                <el-menu-item index="3-2">Option 2</el-menu-item>
-              </el-menu-item-group>
-              <el-menu-item-group title="Group 2">
-                <el-menu-item index="3-3">Option 3</el-menu-item>
-              </el-menu-item-group>
-              <el-submenu index="3-4">
-                <template slot="title">Option 4</template>
-                <el-menu-item index="3-4-1">Option 4-1</el-menu-item>
-              </el-submenu>
-            </el-submenu>
+            
           </el-menu>
         </el-aside>
 
@@ -70,19 +37,19 @@
             <el-dropdown>
               <i class="el-icon-setting" style="margin-right: 15px"></i>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>View</el-dropdown-item>
-                <el-dropdown-item>Add</el-dropdown-item>
-                <el-dropdown-item>Delete</el-dropdown-item>
+                <el-dropdown-item>背影</el-dropdown-item>
+                <el-dropdown-item>添加</el-dropdown-item>
+                <el-dropdown-item>删除</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
-            <span @click="addGuest">Add guest</span>
+            <span @click="addGuest">添加客人</span>
           </el-header>
 
           <el-main>
             <div class="demo-input-size">
               <el-input
                 size="small"
-                placeholder="Please input your name"
+                placeholder="输入你的名字"
                 type="text"
                 v-model="user.name"
                 clearable="true"
@@ -90,7 +57,7 @@
               </el-input>
               <el-input
                 size="small"
-                placeholder="Please input yuour ID"
+                placeholder="输入你的 ID"
                 type="number"
                 v-model="user.idNumber"
                 clearable="true"
@@ -101,25 +68,23 @@
                   size="small"
                   v-model="user.datetime"
                   type="datetimerange"
-                  range-separator="To"
-                  start-placeholder="Start date"
-                  end-placeholder="End date"
+                  range-separator="到"
+                  start-placeholder="开始日期"
+                  end-placeholder="结束日期"
                   clearable="true"
                 >
                 </el-date-picker>
               </div>
               <el-input
                 size="small"
-                placeholder="Telephone number"
+                placeholder="手机号"
                 accept="number"
                 v-model="user.telephone"
                 clearable="true"
               >
               </el-input>
-              <i class="el-icon-edit" @click="edit" color="#1e90ff">Edit</i>
-              <i class="el-icon-delete" @click="remove" color="#ff0000"
-                >Delete</i
-              >
+              <i class="el-icon-edit" @click="edit" color="#1e90ff">编辑</i>
+              <i class="el-icon-delete" @click="remove" color="#ff0000">删除</i>
             </div>
           </el-main>
         </el-container>
