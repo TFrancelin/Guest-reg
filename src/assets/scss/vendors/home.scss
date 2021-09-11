@@ -36,33 +36,30 @@
   }
 }
 
-.demo-input-size {
-  display: flex;
+.demonstration {
+  margin-right: 10px;
+}
 
-  .elInput {
-    flex: 1;
-    justify-content: space-between !important;
-    margin: 0 5px !important;
+.block {
+  width: 340px;
+  display: block ruby;
+  margin-bottom: 22px;
 
-    .el-input__icon {
-      height: 10px !important;
-    }
+  .block1, .block2 {
+    margin-left: 53px;
   }
+}
 
-  i{
-    margin: 0 8px;
-    text-align: center;
-    padding: 5px 8px;
-    font-size: 17px;
-    border: 1px solid whitesmoke;
-    border-radius: 5px;
-  }
+.time {
+  position: fixed;
+  float: left;
+  left: 500px;
+  bottom: auto;
+  margin: 0px;
+  top: 405px;
+}
 
-  .el-icon-edit {
-    color: #1e90ff;
-  }
-
-  .el-icon-delete {
-    color:#ff0000;
-  }
+.dialog_header {
+  text-align: center;
+  color: inherit;
 }
