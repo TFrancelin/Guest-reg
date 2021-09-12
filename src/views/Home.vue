@@ -25,7 +25,6 @@
                 <el-menu-item index="1-4-1">选项 4-1</el-menu-item>
               </el-submenu>
             </el-submenu>
-            
           </el-menu>
         </el-aside>
 
@@ -42,7 +41,52 @@
                 <el-dropdown-item>删除</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
-            <span @click="addGuest">添加客人</span>
+            <el-button type="text" @click="dialogFormVisible = true"
+              >修改</el-button
+            >
+
+            <el-dialog
+              title="Shipping address"
+              :visible.sync="dialogFormVisible"
+              type="number"
+            >
+              <el-form :model="form" type="number">
+                <el-form-item
+                  label="Name"
+                  :label-width="formLabelWidth"
+                  type="number"
+                >
+                  <el-input v-model="form.name" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="Id Number" :label-width="formLabelWidth">
+                  <el-input v-model="form.idBox1" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="Stat At" :label-width="formLabelWidth">
+                  <el-input
+                    v-model="form.statBox1"
+                    autocomplete="off"
+                  ></el-input>
+                </el-form-item>
+                <el-form-item label="End At" :label-width="formLabelWidth">
+                  <el-input
+                    v-model="form.endBox1"
+                    autocomplete="off"
+                  ></el-input>
+                </el-form-item>
+                <el-form-item label="Telephone" :label-width="formLabelWidth">
+                  <el-input
+                    v-model="form.telephoneBox1"
+                    autocomplete="off"
+                  ></el-input>
+                </el-form-item>
+              </el-form>
+              <span slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible = false">Cancel</el-button>
+                <el-button type="primary" @click="dialogFormVisible = false"
+                  >Confirm</el-button
+                >
+              </span>
+            </el-dialog>
           </el-header>
 
           <el-main>
@@ -78,7 +122,7 @@
               <el-input
                 size="small"
                 placeholder="手机号"
-                accept="number"
+                type="number"
                 v-model="user.telephone"
                 clearable="true"
               >
@@ -109,6 +153,19 @@ export default {
           new Date(2000, 10, 11, 10, 10),
         ],
       },
+      dialogFormVisible: false,
+      form: {
+        name: "",
+        idbox1: "",
+        statBox1: "",
+        endBox1: "",
+        telephoneBox1: "",
+        delivery: false,
+        type: [],
+        resource: "",
+        desc: "",
+      },
+      formLabelWidth: "120px",
     };
   },
   methods: {
