@@ -36,30 +36,33 @@
   }
 }
 
-.demonstration {
-  margin-right: 10px;
-}
+.demo-input-size {
+  display: flex;
 
 .block {
-  width: 340px;
+  width: 350px;
   display: block ruby;
   margin-bottom: 22px;
 
   .block1, .block2 {
     margin-left: 53px;
+    // width: 100%;
   }
-}
 
-.time {
-  position: fixed;
-  float: left;
-  left: 500px;
-  bottom: auto;
-  margin: 0px;
-  top: 405px;
-}
+  i{
+    margin: 0 8px;
+    text-align: center;
+    padding: 5px 8px;
+    font-size: 17px;
+    border: 1px solid whitesmoke;
+    border-radius: 5px;
+  }
 
-.dialog_header {
-  text-align: center;
-  color: inherit;
+  .el-icon-edit {
+    color: #1e90ff;
+  }
+
+  .el-icon-delete {
+    color:#ff0000;
+  }
 }
