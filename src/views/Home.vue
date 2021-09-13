@@ -190,6 +190,7 @@ export default {
   methods: {
     addGuest() {},
   },
+  editGuest() {},
 };
 </script>
 
