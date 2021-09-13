@@ -189,8 +189,10 @@ export default {
 
   methods: {
     addGuest() {},
+    
+    editGuest() {},
   },
-  editGuest() {},
+   
 };
 </script>
 
