@@ -41,12 +41,13 @@
 }
 
 .block {
-  width: 340px;
+  width: 350px;
   display: block ruby;
   margin-bottom: 22px;
 
   .block1, .block2 {
     margin-left: 53px;
+    // width: 100%;
   }
 }
 

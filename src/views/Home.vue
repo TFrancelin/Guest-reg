@@ -49,12 +49,13 @@
               <h2 class="dialog_header">请添加你的信息</h2>
               <el-form :model="form">
                 <el-form-item label="名字" :label-width="formLabelWidth">
-                  <el-input v-model="form.name" autocomplete="off"></el-input>
+                  <el-input v-model="form.name" autocomplete="on"></el-input>
                 </el-form-item>
                 <el-form-item label="身份证号" :label-width="formLabelWidth">
-                  <el-input v-model="form.id_number">
-                    autocomplete="off" ></el-input
-                  >
+                  <el-input
+                    v-model="form.id_number"
+                    autocomplete="on"
+                  ></el-input>
                 </el-form-item>
                 <div class="block">
                   <div class="block1">
@@ -148,6 +149,32 @@ export default {
       formLabelWidth: "120px",
       id: "",
       checkInRecord: "",
+      pickerOptions: {
+        shortcuts: [
+          {
+            text: "Today",
+            onClick(picker) {
+              picker.$emit("pick", new Date());
+            },
+          },
+          {
+            text: "Yesterday",
+            onClick(picker) {
+              const date = new Date();
+              date.setTime(date.getTime() - 3600 * 1000 * 24);
+              picker.$emit("pick", date);
+            },
+          },
+          {
+            text: "A week ago",
+            onClick(picker) {
+              const date = new Date();
+              date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+              picker.$emit("pick", date);
+            },
+          },
+        ],
+      },
     };
   },
 
@@ -163,7 +190,6 @@ export default {
       })
       .then(function (response) {
         console.log(response);
-        
       })
       .catch(function (error) {
         console.log(error);
