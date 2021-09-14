@@ -57,21 +57,18 @@
                     autocomplete="on"
                   ></el-input>
                 </el-form-item>
-                <el-form-item label="Stat At" :label-width="formLabelWidth">
+                <el-form-item label="Start At" :label-width="formLabelWidth">
                   <el-input
-                    v-model="form.statBox1"
+                    v-model="form.date_time1"
                     autocomplete="off"
                   ></el-input>
                 </el-form-item>
                 <el-form-item label="End At" :label-width="formLabelWidth">
-                  <el-input
-                    v-model="form.endBox1"
-                    autocomplete="off"
-                  ></el-input>
+                  <el-input v-model="form.date_time2" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="Telephone" :label-width="formLabelWidth">
                   <el-input
-                    v-model="form.telephoneBox1"
+                    v-model="form.telephone"
                     autocomplete="off"
                   ></el-input>
                 </el-form-item>
@@ -164,32 +161,6 @@ export default {
       formLabelWidth: "120px",
       id: "",
       checkInRecord: "",
-      pickerOptions: {
-        shortcuts: [
-          {
-            text: "Today",
-            onClick(picker) {
-              picker.$emit("pick", new Date());
-            },
-          },
-          {
-            text: "Yesterday",
-            onClick(picker) {
-              const date = new Date();
-              date.setTime(date.getTime() - 3600 * 1000 * 24);
-              picker.$emit("pick", date);
-            },
-          },
-          {
-            text: "A week ago",
-            onClick(picker) {
-              const date = new Date();
-              date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
-              picker.$emit("pick", date);
-            },
-          },
-        ],
-      },
     };
   },
   methods: {
