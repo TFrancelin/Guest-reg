@@ -64,7 +64,10 @@
                   ></el-input>
                 </el-form-item>
                 <el-form-item label="End At" :label-width="formLabelWidth">
-                  <el-input v-model="form.date_time2" autocomplete="off"></el-input>
+                  <el-input
+                    v-model="form.date_time2"
+                    autocomplete="off"
+                  ></el-input>
                 </el-form-item>
                 <el-form-item label="Telephone" :label-width="formLabelWidth">
                   <el-input
