@@ -41,48 +41,29 @@
                 <el-dropdown-item>删除</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
-            <el-button type="text" @click="dialogFormVisible = true"
-              >修改</el-button
-            >
+            
+            
 
-            <el-dialog title="" :visible.sync="dialogFormVisible">
-              <h2 class="dialog_header">请添加你的信息</h2>
-              <el-form :model="form">
-                <el-form-item label="名字" :label-width="formLabelWidth">
-                  <el-input v-model="form.name" autocomplete="on"></el-input>
-                </el-form-item>
-                <el-form-item label="身份证号" :label-width="formLabelWidth">
-                  <el-input
-                    v-model="form.id_number"
-                    autocomplete="on"
-                  ></el-input>
-                </el-form-item>
-                <el-form-item label="Start At" :label-width="formLabelWidth">
-                  <el-input
-                    v-model="form.date_time1"
-                    autocomplete="off"
-                  ></el-input>
-                </el-form-item>
-                <el-form-item label="End At" :label-width="formLabelWidth">
-                  <el-input
-                    v-model="form.date_time2"
-                    autocomplete="off"
-                  ></el-input>
-                </el-form-item>
-                <el-form-item label="Telephone" :label-width="formLabelWidth">
-                  <el-input
-                    v-model="form.telephone"
-                    autocomplete="off"
-                  ></el-input>
-                </el-form-item>
-              </el-form>
-              <span slot="footer" class="dialog-footer">
-                <el-button @click="dialogFormVisible = false">Cancel</el-button>
-                <el-button type="primary" @click="dialogFormVisible = false"
-                  >Confirm</el-button
-                >
-              </span>
-            </el-dialog>
+            <!-- Form -->
+          <el-button type="text" @click="dialogFormVisible = true">修改</el-button>
+
+          <el-dialog title="Shipping address" :visible.sync="dialogFormVisible">
+            <el-form :model="form">
+              <el-form-item label="名字" :label-width="formLabelWidth">
+               <el-input v-model="form.name" autocomplete="off"></el-input>
+              </el-form-item>
+               <el-form-item label="身份证号码" :label-width="formLabelWidth">
+               <el-input v-model="form.name" autocomplete="off"></el-input>
+              </el-form-item>
+               <el-form-item label="手机号码" :label-width="formLabelWidth">
+               <el-input v-model="form.name" autocomplete="off"></el-input>
+              </el-form-item>
+             </el-form>
+          <span slot="footer" class="dialog-footer">
+             <el-button @click="dialogFormVisible = false">Cancel</el-button>
+             <el-button type="primary" @click="dialogFormVisible = false">Confirm</el-button>
+          </span>
+          </el-dialog>
           </el-header>
 
           <el-main>
