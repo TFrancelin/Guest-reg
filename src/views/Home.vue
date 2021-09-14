@@ -239,7 +239,6 @@ export default {
           visitorName: this.form.name,
           telephone: this.form.telephone,
           startAt: this.form.date_time1,
-          endAt: this.form.date_time2,
         })
         .then(function (response) {
           console.log(response);
@@ -249,32 +248,6 @@ export default {
         });
     },
 
-<<<<<<< HEAD
-    axios
-      .get("http://60.205.247.119:8080/visit-sys/visitor/list", {
-        params: {},
-      })
-      .then(function (response) {
-        console.log(response.data.data);
-        if (response.data.code == 10001) {
-          that.users = that.users.concat(response.data.data);
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
-      .then(function () {
-        // always executed
-      });
-  },
-
-  methods: {
-    addGuest() {},
-    
-    editGuest() {},
-  },
-   
-=======
     remove() {
       const axios = require("axios");
       axios
@@ -287,7 +260,6 @@ export default {
         });
     },
   },
->>>>>>> c9d04e85c216c175a0eb067bdbf4d15f4b2a057d
 };
 </script>
 
