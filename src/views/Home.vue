@@ -46,7 +46,7 @@
             >
 
             <el-dialog title="" :visible.sync="dialogFormVisible">
-              <h2 class="dialog_header">请添加你的信息</h2>
+              <h2 class="dialog_header" align="center">请添加你的信息</h2>
               <el-form :model="form">
                 <el-form-item label="名字" :label-width="formLabelWidth">
                   <el-input v-model="form.name" autocomplete="on"></el-input>
@@ -57,21 +57,22 @@
                     autocomplete="on"
                   ></el-input>
                 </el-form-item>
-                
-                  <div class="block-3">
-    
-                  <el-date-picker
-                    v-model="value"
-                    type="daterange"
-                    start-placeholder="Start date"
-                    end-placeholder="End date"
-                    :default-time="['00:00:00', '23:59:59']">
-                  </el-date-picker>
-                </div>
+                <el-form-item label="时间" :label-width="formLabelWidth">
+                  <div class="block">
+                    <el-date-picker
+                      v-model="value1"
+                      type="datetimerange"
+                      start-placeholder="开始时间"
+                      end-placeholder="结束时间"
+                      :default-time="['00:00:00']">
+                    </el-date-picker>
+                  </div>
+                </el-form-item>
                 <el-form-item label="手机号码" :label-width="formLabelWidth">
                   <el-input
                     v-model="form.telephone"
                     autocomplete="off"
+                    type="number"
                   ></el-input>
                 </el-form-item>
               </el-form>
@@ -88,7 +89,7 @@
             <div class="demo-input-size">
               <el-table :data="users" style="width: 100%">
                 <el-table-column prop="name" label="名字"> </el-table-column>
-                <el-table-column fixed prop="date" label="身份证号">
+                <el-table-column prop="date" label="身份证号">
                 </el-table-column>
                 <el-table-column prop="state" label="开始日期">
                 </el-table-column>
@@ -145,6 +146,8 @@ export default {
       formLabelWidth: "120px",
       id: "",
       checkInRecord: "",
+         value1: '',
+        value2: '',
     };
   },
   methods: {
