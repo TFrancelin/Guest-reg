@@ -57,18 +57,18 @@
                     autocomplete="on"
                   ></el-input>
                 </el-form-item>
-                <el-form-item label="Start At" :label-width="formLabelWidth">
-                  <el-input
-                    v-model="form.date_time1"
-                    autocomplete="off"
-                  ></el-input>
-                </el-form-item>
-                <el-form-item label="End At" :label-width="formLabelWidth">
-                  <el-input
-                    v-model="form.date_time2"
-                    autocomplete="off"
-                  ></el-input>
-                </el-form-item>
+                
+                 <div class="block">
+                  <p>Component value：{{ value }}</p>
+                 <el-date-picker
+                   v-model="value"
+                   type="daterange"
+                   start-placeholder="Start date"
+                   end-placeholder="End date"
+                   :default-time="['00:00:00', '23:59:59']">
+                  </el-date-picker>
+                </div>
+               </div>
                 <el-form-item label="Telephone" :label-width="formLabelWidth">
                   <el-input
                     v-model="form.telephone"
@@ -140,7 +140,9 @@ export default {
         type: [],
         resource: "",
         desc: "",
+        value1: '',
       },
+     
       formLabelWidth: "120px",
       id: "",
       checkInRecord: "",
