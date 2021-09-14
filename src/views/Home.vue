@@ -42,7 +42,7 @@
               </el-dropdown-menu>
             </el-dropdown>
             <el-button type="text" @click="dialogFormVisible = true"
-              >修改</el-button
+              >添加客人</el-button
             >
 
             <el-dialog title="" :visible.sync="dialogFormVisible">
@@ -64,7 +64,10 @@
                   ></el-input>
                 </el-form-item>
                 <el-form-item label="End At" :label-width="formLabelWidth">
-                  <el-input v-model="form.date_time2" autocomplete="off"></el-input>
+                  <el-input
+                    v-model="form.date_time2"
+                    autocomplete="off"
+                  ></el-input>
                 </el-form-item>
                 <el-form-item label="Telephone" :label-width="formLabelWidth">
                   <el-input
@@ -74,9 +77,9 @@
                 </el-form-item>
               </el-form>
               <span slot="footer" class="dialog-footer">
-                <el-button @click="dialogFormVisible = false">Cancel</el-button>
+                <el-button @click="dialogFormVisible = false">取消</el-button>
                 <el-button type="primary" @click="dialogFormVisible = false"
-                  >Confirm</el-button
+                  >确认</el-button
                 >
               </span>
             </el-dialog>
@@ -84,44 +87,32 @@
 
           <el-main>
             <div class="demo-input-size">
-              <el-input
-                size="small"
-                placeholder="输入你的名字"
-                type="text"
-                v-model="user.name"
-                clearable="true"
-              >
-              </el-input>
-              <el-input
-                size="small"
-                placeholder="输入你的 ID"
-                type="number"
-                v-model="user.idNumber"
-                clearable="true"
-              >
-              </el-input>
-              <div class="block">
-                <el-date-picker
-                  size="small"
-                  v-model="user.datetime"
-                  type="datetimerange"
-                  range-separator="到"
-                  start-placeholder="开始日期"
-                  end-placeholder="结束日期"
-                  clearable="true"
-                >
-                </el-date-picker>
-              </div>
-              <el-input
-                size="small"
-                placeholder="手机号"
-                type="number"
-                v-model="user.telephone"
-                clearable="true"
-              >
-              </el-input>
-              <i class="el-icon-edit" @click="edit" color="#1e90ff">编辑</i>
-              <i class="el-icon-delete" @click="remove" color="#ff0000">删除</i>
+              <el-table :data="users" style="width: 100%">
+                <el-table-column prop="name" label="名字"> </el-table-column>
+                <el-table-column fixed prop="date" label="身份证号">
+                </el-table-column>
+                <el-table-column prop="state" label="开始日期">
+                </el-table-column>
+                <el-table-column prop="city" label="结束日期">
+                </el-table-column>
+                <el-table-column prop="address" label="手机号">
+                </el-table-column>
+                <el-table-column fixed="right" label="操作">
+                  <template slot-scope="scope"
+                    >{{ (scope.$index, users) }}
+                    <el-button
+                      style="color: blue"
+                      @click="editGuest"
+                      type="text"
+                      size="small"
+                      >修改</el-button
+                    >
+                    <el-button style="color: red" type="text" size="small"
+                      >删除</el-button
+                    >
+                  </template>
+                </el-table-column>
+              </el-table>
             </div>
           </el-main>
         </el-container>
@@ -137,15 +128,7 @@ export default {
   components: {},
   data() {
     return {
-      user: {
-        name: "",
-        idNumber: "",
-        telephone: "",
-        datetime: [
-          new Date(2000, 10, 10, 10, 10),
-          new Date(2000, 10, 11, 10, 10),
-        ],
-      },
+      users: [],
       dialogFormVisible: false,
       form: {
         name: "",
@@ -219,12 +202,13 @@ export default {
         });
     },
 
-    remove() {
+    remove(index, rows) {
       const axios = require("axios");
       axios
         .delete("http://60.205.247.119:8080/visit-sys/visitor/del", {})
         .then(function (response) {
           console.log(response);
+          rows.splice(index, 1);
         })
         .catch(function (error) {
           console.log(error);
