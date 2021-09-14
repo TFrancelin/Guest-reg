@@ -58,7 +58,16 @@
                   ></el-input>
                 </el-form-item>
                 
-                 
+                  <div class="block-3">
+    
+    <el-date-picker
+      v-model="value"
+      type="daterange"
+      start-placeholder="Start date"
+      end-placeholder="End date"
+      :default-time="['00:00:00', '23:59:59']">
+    </el-date-picker>
+  </div>
                 <el-form-item label="Telephone" :label-width="formLabelWidth">
                   <el-input
                     v-model="form.telephone"
@@ -130,7 +139,7 @@ export default {
         type: [],
         resource: "",
         desc: "",
-        value1: '',
+        value: ''
       },
      
       formLabelWidth: "120px",
