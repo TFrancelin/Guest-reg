@@ -98,11 +98,10 @@
                 <el-table-column prop="address" label="手机号">
                 </el-table-column>
                 <el-table-column fixed="right" label="操作">
-                  <template slot-scope="scope"
-                    >{{ (scope.$index, users) }}
+                  <template slot-scope="scope">
                     <el-button
                       style="color: blue"
-                      @click="editGuest"
+                      @click="handleClick(scope.row.id)"
                       type="text"
                       size="small"
                       >修改</el-button
@@ -147,30 +146,28 @@ export default {
     };
   },
   methods: {
-    addGuest() {
-      const axios = require("axios");
-      axios
-        .post("http://60.205.247.119:8080/visit-sys/visitor/checkIn/save", {
-          checkInRecord: this.checkInRecord,
-          id: this.id,
-          identification: this.form.id_number,
-          visitorName: this.form.name,
-        })
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    },
+    // addGuest() {
+    //   const axios = require("axios");
+    //   axios
+    //     .post("http://60.205.247.119:8080/visit-sys/visitor/checkIn/save", {
+    //       checkInRecord: this.checkInRecord,
+    //       id: this.id,
+    //       identification: this.form.id_number,
+    //       visitorName: this.form.name,
+    //     })
+    //     .then(function (response) {
+    //       console.log(response);
+    //     })
+    //     .catch(function (error) {
+    //       console.log(error);
+    //     });
+    // },
 
     async created() {
       const axios = require("axios");
       let that = this;
       axios
-        .get("http://60.205.247.119:8080/visit-sys/visitor/list", {
-          params: {},
-        })
+        .get("http://60.205.247.119:8080/visit-sys/visitor/list", {})
         .then(function (response) {
           console.log(response.data.data);
           if (response.data.code == 10001) {
@@ -184,36 +181,37 @@ export default {
           // always executed
         });
     },
-    editGuest() {
-      const axios = require("axios");
-      axios
-        .put("http://60.205.247.119:8080/visit-sys/visitor/update ", {
-          visitor: this.user,
-          identification: this.form.id_number,
-          visitorName: this.form.name,
-          telephone: this.form.telephone,
-          startAt: this.form.date_time1,
-        })
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    },
 
-    remove(index, rows) {
-      const axios = require("axios");
-      axios
-        .delete("http://60.205.247.119:8080/visit-sys/visitor/del", {})
-        .then(function (response) {
-          console.log(response);
-          rows.splice(index, 1);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    },
+    // editGuest() {
+    //   const axios = require("axios");
+    //   axios
+    //     .put("http://60.205.247.119:8080/visit-sys/visitor/update", {
+    //       visitor: this.user,
+    //       identification: this.form.id_number,
+    //       visitorName: this.form.name,
+    //       telephone: this.form.telephone,
+    //       startAt: this.form.date_time1,
+    //     })
+    //     .then(function (response) {
+    //       console.log(response);
+    //     })
+    //     .catch(function (error) {
+    //       console.log(error);
+    //     });
+    // },
+
+    // remove(index, rows) {
+    //   const axios = require("axios");
+    //   axios
+    //     .delete("http://60.205.247.119:8080/visit-sys/visitor/del", {})
+    //     .then(function (response) {
+    //       console.log(response);
+    //       rows.splice(index, 1);
+    //     })
+    //     .catch(function (error) {
+    //       console.log(error);
+    //     });
+    // },
   },
 };
 </script>
