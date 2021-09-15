@@ -35,19 +35,24 @@
     }
   }
 }
-
-.demo-input-size {
-  display: flex;
+// .block-3{
+//   display: inline-block;
+//   margin-right: 165px;
+//   margin-bottom: 17px;
+// }
+// .demo-input-size {
+//   display: flex;
+// }
 
 .block {
   width: 350px;
   display: block ruby;
-  margin-bottom: 22px;
+  margin-bottom: 2px;
 
-  .block1, .block2 {
-    margin-left: 53px;
-    // width: 100%;
-  }
+  // .block1, .block2 {
+  //   margin-left: 53px;
+  //   // width: 100%;
+  // }
 }
 
   i{
@@ -66,4 +71,3 @@
   .el-icon-delete {
     color:#ff0000;
   }
-}
