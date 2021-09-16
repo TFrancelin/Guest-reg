@@ -39,6 +39,9 @@
   display: inline-block;
   margin-right: 165px;
   margin-bottom: 17px;
+  border-top:none;
+  border-left:none;
+  border-right:none;
 }
 .demo-input-size {
   display: flex;
@@ -71,3 +74,4 @@
   .el-icon-delete {
     color:#ff0000;
   }
+

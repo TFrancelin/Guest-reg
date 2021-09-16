@@ -7,6 +7,8 @@
           width="200px"
           style="background-color: rgb(238, 241, 246)"
         >
+
+          <!-- Drop-menu -->
           <el-menu :default-openeds="['1', '3']">
             <el-submenu index="1">
               <template slot="title"
@@ -33,6 +35,8 @@
             class="guest-nav"
             style="text-align: right; font-size: 12px"
           >
+
+          <!-- Drop-down options-->
             <el-dropdown>
               <i class="el-icon-setting" style="margin-right: 15px"></i>
               <el-dropdown-menu slot="dropdown">
@@ -41,10 +45,12 @@
                 <el-dropdown-item>删除</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
+
+            <!-- Add Guest Button -->
             <el-button type="text" @click="dialogFormVisible = true"
               >添加客人</el-button
             >
-
+            <!-- Guest information/input table -->
             <el-dialog title="" :visible.sync="dialogFormVisible">
               <h2 class="dialog_header">请添加你的信息</h2>
               <el-form :model="form">
@@ -58,13 +64,13 @@
                   ></el-input>
                 </el-form-item>
                 
+                <!-- Date-picker -->
                   <div class="block-3">
-    
                   <el-date-picker
                     v-model="value"
                     type="daterange"
-                    start-placeholder="Start date"
-                    end-placeholder="End date"
+                    start-placeholder="开是时间"
+                    end-placeholder="结束时间"
                     :default-time="['00:00:00', '23:59:59']">
                   </el-date-picker>
                 </div>
@@ -75,15 +81,17 @@
                   ></el-input>
                 </el-form-item>
               </el-form>
+
+              <!-- Edit and delete buttons -->
               <span slot="footer" class="dialog-footer">
                 <el-button @click="dialogFormVisible = false">取消</el-button>
                 <el-button type="primary" @click="dialogFormVisible = false"
-                  >确认</el-button
-                >
+                  >确认</el-button>
               </span>
             </el-dialog>
           </el-header>
 
+            <!-- table info -->
           <el-main>
             <div class="demo-input-size">
               <el-table :data="users" style="width: 100%">
