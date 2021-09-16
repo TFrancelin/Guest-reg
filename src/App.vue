@@ -1,7 +1,7 @@
-<template>
+<template style="background-image: url(https://pixy.org/src/480/4800346.jpg)">
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link>
+      <router-link to="/"><h1>Home</h1> </router-link>
     </div>
     <router-view />
   </div>
@@ -16,5 +16,19 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background-image: url("https://pixy.org/src/480/4800346jpg");
+}
+
+#nav {
+  padding: 30px;
+
+  a {
+    font-weight: bold;
+    color: #2c3e50;
+
+    &.router-link-exact-active {
+      color: #42b983;
+    }
+  }
 }
 </style>
