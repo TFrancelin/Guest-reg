@@ -45,8 +45,8 @@
               >添加客人</el-button
             >
 
-            <el-dialog title="" :visible.sync="dialogFormVisible">
-              <h2 class="dialog_header" align="center">请添加你的信息</h2>
+            <el-dialog title="请添加你的信息" :visible.sync="dialogFormVisible" center=true>
+              <h2 class="dialog_header" align="center"></h2>
               <el-form :model="form">
                 <el-form-item label="名字" :label-width="formLabelWidth">
                   <el-input v-model="form.name" autocomplete="on"></el-input>
