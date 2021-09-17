@@ -98,11 +98,7 @@
             </el-dialog>
           </el-header>
 
-<<<<<<< HEAD
-          <!-- table info -->
-=======
           <!-- table with users info per row, and each row with edit and delete buttons -->
->>>>>>> 8c2df3cf1d67afa39a6ecbfcde47b4062c77b34e
           <el-main>
             <div class="demo-input-size">
               <el-table :data="users" style="width: 100%">
