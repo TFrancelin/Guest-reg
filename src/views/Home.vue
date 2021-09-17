@@ -204,13 +204,13 @@ export default {
         })
         .then(function (response) {
           console.log(response);
-          that.users = that.users.concat(response.data.data);
+          that.users = that.users.concat(response.data.data); //Users array already exist with data in, so it'll add new data in and insert in the database on the server side
         })
         .catch(function (error) {
           console.log(error);
         });
       this.dialogFormVisible = false;
-      this.initData();
+      this.initData(); //Call back the function  and display the new list of users
     },
     //  getTable() {
     //   let that = this;
