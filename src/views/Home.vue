@@ -62,7 +62,7 @@
                 <div class="block">
                   <span class="demonstration1">开始时间</span>
                   <el-date-picker
-                    v-model="value1"
+                    v-model="form.startAt"
                     type="datetime"
                     placeholder="选择日期和时间"
                     clearable="true"
@@ -70,7 +70,7 @@
                   </el-date-picker>
                   <span class="demonstration2">结束时间</span>
                   <el-date-picker
-                    v-model="value2"
+                    v-model="form.endAt"
                     type="datetime"
                     placeholder="选择日期和时间"
                     clearable="true"
@@ -161,22 +161,22 @@ export default {
       formLabelWidth: "120px",
       id: "",
       checkInRecord: "",
-      value1: "",
-      value2: "",
     };
   },
   methods: {
-    addGuest(form) {
+    add_guest(form) {
       console.log(form);
       this.users.push(form);
       const axios = require("axios");
       let that = this;
       axios
-        .post("http://60.205.247.119:8080/visit-sys/visitor/checkIn/save", {
+        .post("http://60.205.247.119:8080/visit-sys/visit-sys/visitor/save", {
           checkInRecord: this.checkInRecord,
-          id: this.id,
+          visitorName: this.form.visitorName,
           identification: this.form.id_number,
-          visitorName: this.form.name,
+          startAt: this.form.startAt,
+          endAt: this.form.endAt,
+          mobile: this.form.mobile,
         })
         .then(function (response) {
           console.log(response);
@@ -209,7 +209,7 @@ export default {
       this.form = user;
       console.log(this.form.value);
       this.dialogFormVisible = true;
-      let that = this;
+      // let that = this;
       // const axios = require("axios");
       // axios
       //   .put("http://60.205.247.119:8080/visit-sys/visitor/update", {
