@@ -43,17 +43,20 @@
 // .demo-input-size {
 //   display: flex;
 // }
+ .block {
+    display: flex;
+    margin-left: 10%;
+    margin-bottom: 3%;
 
-.block {
-  width: 350px;
-  display: block ruby;
-  margin-bottom: 2px;
+  //  width: 350px;
+  //  display: flex;
+//   margin-bottom: 2px;
 
-  // .block1, .block2 {
-  //   margin-left: 53px;
-  //   // width: 100%;
-  // }
-}
+//   // .block1, .block2 {
+//   //   margin-left: 53px;
+//   //   // width: 100%;
+//   // }
+  }
 
   i{
     margin: 0 8px;
@@ -72,3 +75,19 @@
     color:#ff0000;
   }
 
+ .el-input__icon {
+   height: 38%;
+   width: 5px;
+   text-align: center;
+   transition: all .3s;
+   line-height: 30px;
+   margin-left: -25%;
+   }
+  .demonstration1{
+    margin-right: 15px;
+    margin-left: -4%;
+  }
+     .demonstration2{
+    margin-right: 4%;
+    margin-left: 16%;
+  }
