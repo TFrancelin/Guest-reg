@@ -40,7 +40,7 @@
             <el-button type="text" @click="dialogFormVisible = true"
               >添加客人</el-button
             >
-            <!-- Guest information/input table -->
+            <!-- DialogBox with form in where to fill each user information -->
             <el-dialog title="" :visible.sync="dialogFormVisible">
               <h2 class="dialog_header" align="center">请添加你的信息</h2>
               <el-form :model="form">
@@ -88,7 +88,7 @@
                 </el-form-item>
               </el-form>
 
-              <!-- Edit and delete buttons -->
+              <!-- Cancel and confirm buttons at the dialogBox footer -->
               <span slot="footer" class="dialog-footer">
                 <el-button @click="dialogFormVisible = false">取消</el-button>
                 <el-button type="primary" @click="dialogFormVisible = false"
@@ -98,7 +98,11 @@
             </el-dialog>
           </el-header>
 
+<<<<<<< HEAD
           <!-- table info -->
+=======
+          <!-- table with users info per row, and each row with edit and delete buttons -->
+>>>>>>> 8c2df3cf1d67afa39a6ecbfcde47b4062c77b34e
           <el-main>
             <div class="demo-input-size">
               <el-table :data="users" style="width: 100%">
@@ -211,12 +215,13 @@ export default {
     //       console.log(error);
     //     });
     // },
+
     edit_guest(user) {
-      // const axios = require("axios");
       console.log(user);
       this.form = user;
       console.log(this.form.value);
       this.dialogFormVisible = true;
+      // const axios = require("axios");
       // axios
       //   .put("http://60.205.247.119:8080/visit-sys/visitor/update", {
       //     visitor: this.user,
