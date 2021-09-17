@@ -48,31 +48,42 @@
                   <el-input
                     v-model="form.visitorName"
                     autocomplete="on"
+                    clearable="true"
                   ></el-input>
                 </el-form-item>
                 <el-form-item label="身份证号" :label-width="formLabelWidth">
                   <el-input
                     v-model="form.identification"
                     autocomplete="on"
+                    clearable="true"
                   ></el-input>
                 </el-form-item>
-                <el-form-item label="时间" :label-width="formLabelWidth">
-                  <div class="block">
-                    <el-date-picker
-                      v-model="value1"
-                      type="datetimerange"
-                      start-placeholder="开始时间"
-                      end-placeholder="结束时间"
-                      :default-time="['00:00:00']"
-                    >
-                    </el-date-picker>
-                  </div>
-                </el-form-item>
+
+                <div class="block">
+                  <span class="demonstration1">开始时间</span>
+                  <el-date-picker
+                    v-model="value1"
+                    type="datetime"
+                    placeholder="选择日期和时间"
+                    clearable="true"
+                  >
+                  </el-date-picker>
+                  <span class="demonstration2">结束时间</span>
+                  <el-date-picker
+                    v-model="value2"
+                    type="datetime"
+                    placeholder="选择日期和时间"
+                    clearable="true"
+                  >
+                  </el-date-picker>
+                </div>
+
                 <el-form-item label="手机号码" :label-width="formLabelWidth">
                   <el-input
                     v-model.number="form.mobile"
                     autocomplete="off"
                     type="number"
+                    clearable="true"
                   ></el-input>
                 </el-form-item>
               </el-form>
