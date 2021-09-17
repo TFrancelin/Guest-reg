@@ -80,7 +80,7 @@
               <!-- Cancel and confirm buttons at the dialogBox footer -->
               <span slot="footer" class="dialog-footer">
                 <el-button @click="dialogFormVisible = false">取消</el-button>
-                <el-button type="primary" @click="dialogFormVisible = false"
+                <el-button type="primary" @click="add_guest(form)"
                   >确认</el-button
                 >
               </span>
@@ -145,7 +145,6 @@ export default {
         startAt: "",
         endAt: "",
         mobile: "",
-        value: [],
       },
 
       formLabelWidth: "120px",
@@ -156,34 +155,27 @@ export default {
     };
   },
   methods: {
-    //     add_guest() {
-    //       this.axios({
-    //         methods: 'get',
-    //         url: 'http://60.205.247.119:8080/visit-sys/visitor/list',
-    //         data: {},
-    //       }).then(function (resp)=>{
-    //         console.log(resp);
-    // ;      })
-    //     }
-    // created() {
-    //   this.getTable();
-    // },
-    // addGuest() {
-    //   const axios = require("axios");
-    //   axios
-    //     .post("http://60.205.247.119:8080/visit-sys/visitor/checkIn/save", {
-    //       checkInRecord: this.checkInRecord,
-    //       id: this.id,
-    //       identification: this.form.id_number,
-    //       visitorName: this.form.name,
-    //     })
-    //     .then(function (response) {
-    //       console.log(response);
-    //     })
-    //     .catch(function (error) {
-    //       console.log(error);
-    //     });
-    // },
+    addGuest(form) {
+      console.log(form);
+      this.users.push(form);
+      const axios = require("axios");
+      let that = this;
+      axios
+        .post("http://60.205.247.119:8080/visit-sys/visitor/checkIn/save", {
+          checkInRecord: this.checkInRecord,
+          id: this.id,
+          identification: this.form.id_number,
+          visitorName: this.form.name,
+        })
+        .then(function (response) {
+          console.log(response);
+          that.users = response.data.data;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      this.dialogFormVisible = false;
+    },
     //  getTable() {
     //   let that = this;
     //   this.$axios({
@@ -206,6 +198,7 @@ export default {
       this.form = user;
       console.log(this.form.value);
       this.dialogFormVisible = true;
+      let that = this;
       // const axios = require("axios");
       // axios
       //   .put("http://60.205.247.119:8080/visit-sys/visitor/update", {
