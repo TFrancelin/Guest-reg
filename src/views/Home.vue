@@ -7,23 +7,16 @@
           width="200px"
           style="background-color: rgb(238, 241, 246)"
         >
+          <!-- Drop-menu -->
           <el-menu :default-openeds="['1', '3']">
             <el-submenu index="1">
               <template slot="title"
                 ><i class="el-icon-message"></i>领航员</template
               >
               <el-menu-item-group>
-                <template slot="title">组 1</template>
                 <el-menu-item index="1-1">选项 1</el-menu-item>
                 <el-menu-item index="1-2">选项 2</el-menu-item>
               </el-menu-item-group>
-              <el-menu-item-group title="Group 2">
-                <el-menu-item index="1-3">选项 3</el-menu-item>
-              </el-menu-item-group>
-              <el-submenu index="1-4">
-                <template slot="title">选项 4</template>
-                <el-menu-item index="1-4-1">选项 4-1</el-menu-item>
-              </el-submenu>
             </el-submenu>
           </el-menu>
         </el-aside>
@@ -33,6 +26,7 @@
             class="guest-nav"
             style="text-align: right; font-size: 12px"
           >
+            <!-- Drop-down options-->
             <el-dropdown>
               <i class="el-icon-setting" style="margin-right: 15px"></i>
               <el-dropdown-menu slot="dropdown">
@@ -41,41 +35,60 @@
                 <el-dropdown-item>删除</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
+
+            <!-- Add Guest Button -->
             <el-button type="text" @click="dialogFormVisible = true"
               >添加客人</el-button
             >
-
-            <el-dialog title="请添加你的信息" :visible.sync="dialogFormVisible" center=true>
-              <h2 class="dialog_header" align="center"></h2>
+            <!-- Guest information/input table -->
+            <el-dialog title="" :visible.sync="dialogFormVisible">
+              <h2 class="dialog_header" align="center">请添加你的信息</h2>
               <el-form :model="form">
                 <el-form-item label="名字" :label-width="formLabelWidth">
-                  <el-input v-model="form.name" autocomplete="on"></el-input>
+                  <el-input
+                    v-model="form.visitorName"
+                    autocomplete="on"
+                    clearable="true"
+                  ></el-input>
                 </el-form-item>
                 <el-form-item label="身份证号" :label-width="formLabelWidth">
                   <el-input
-                    v-model="form.id_number"
+                    v-model="form.identification"
                     autocomplete="on"
+                    clearable="true"
                   ></el-input>
                 </el-form-item>
-                <el-form-item label="时间" :label-width="formLabelWidth">
-                  <div class="block">
-                    <el-date-picker
-                      v-model="value1"
-                      type="datetimerange"
-                      start-placeholder="开始时间"
-                      end-placeholder="结束时间"
-                      :default-time="['00:00:00']">
-                    </el-date-picker>
-                  </div>
-                </el-form-item>
+
+                <div class="block">
+                  <span class="demonstration1">开始时间</span>
+                  <el-date-picker
+                    v-model="value1"
+                    type="datetime"
+                    placeholder="选择日期和时间"
+                    clearable="true"
+                  >
+                  </el-date-picker>
+                  <span class="demonstration2">结束时间</span>
+                  <el-date-picker
+                    v-model="value2"
+                    type="datetime"
+                    placeholder="选择日期和时间"
+                    clearable="true"
+                  >
+                  </el-date-picker>
+                </div>
+
                 <el-form-item label="手机号码" :label-width="formLabelWidth">
                   <el-input
-                    v-model="form.telephone"
+                    v-model.number="form.mobile"
                     autocomplete="off"
                     type="number"
+                    clearable="true"
                   ></el-input>
                 </el-form-item>
               </el-form>
+
+              <!-- Edit and delete buttons -->
               <span slot="footer" class="dialog-footer">
                 <el-button @click="dialogFormVisible = false">取消</el-button>
                 <el-button type="primary" @click="dialogFormVisible = false"
@@ -85,29 +98,36 @@
             </el-dialog>
           </el-header>
 
+          <!-- table info -->
           <el-main>
             <div class="demo-input-size">
               <el-table :data="users" style="width: 100%">
-                <el-table-column prop="name" label="名字"> </el-table-column>
-                <el-table-column prop="date" label="身份证号">
+                <el-table-column
+                  prop="visitorName"
+                  label="名字"
+                ></el-table-column>
+                <el-table-column prop="identification" label="身份证号">
                 </el-table-column>
-                <el-table-column prop="state" label="开始日期">
+                <el-table-column prop="startAt" label="开始日期">
                 </el-table-column>
-                <el-table-column prop="city" label="结束日期">
+                <el-table-column prop="endAt" label="结束日期">
                 </el-table-column>
-                <el-table-column prop="address" label="手机号">
+                <el-table-column prop="mobile" label="手机号">
                 </el-table-column>
                 <el-table-column fixed="right" label="操作">
-                  <template slot-scope="scope"
-                    >{{ (scope.$index, users) }}
+                  <template slot-scope="scope">
                     <el-button
                       style="color: blue"
-                      @click="editGuest"
+                      @click="edit_guest(scope.row)"
                       type="text"
                       size="small"
                       >修改</el-button
                     >
-                    <el-button style="color: red" type="text" size="small"
+                    <el-button
+                      style="color: red"
+                      type="text"
+                      size="small"
+                      @click.native.prevent="deleteRow(scope.$index, users)"
                       >删除</el-button
                     >
                   </template>
@@ -131,93 +151,118 @@ export default {
       users: [],
       dialogFormVisible: false,
       form: {
-        name: "",
-        id_number: "",
-        date_time1: "",
-        date_time2: "",
-        telephone: "",
-        delivery: false,
-        type: [],
-        resource: "",
-        desc: "",
-        value: ''
+        visitorName: "",
+        identification: "",
+        startAt: "",
+        endAt: "",
+        mobile: "",
+        value: [],
       },
-     
+
       formLabelWidth: "120px",
       id: "",
       checkInRecord: "",
-         value1: '',
-        value2: '',
+      value1: "",
+      value2: "",
     };
   },
   methods: {
-    addGuest() {
-      const axios = require("axios");
-      axios
-        .post("http://60.205.247.119:8080/visit-sys/visitor/checkIn/save", {
-          checkInRecord: this.checkInRecord,
-          id: this.id,
-          identification: this.form.id_number,
-          visitorName: this.form.name,
-        })
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+    //     add_guest() {
+    //       this.axios({
+    //         methods: 'get',
+    //         url: 'http://60.205.247.119:8080/visit-sys/visitor/list',
+    //         data: {},
+    //       }).then(function (resp)=>{
+    //         console.log(resp);
+    // ;      })
+    //     }
+    // created() {
+    //   this.getTable();
+    // },
+    // addGuest() {
+    //   const axios = require("axios");
+    //   axios
+    //     .post("http://60.205.247.119:8080/visit-sys/visitor/checkIn/save", {
+    //       checkInRecord: this.checkInRecord,
+    //       id: this.id,
+    //       identification: this.form.id_number,
+    //       visitorName: this.form.name,
+    //     })
+    //     .then(function (response) {
+    //       console.log(response);
+    //     })
+    //     .catch(function (error) {
+    //       console.log(error);
+    //     });
+    // },
+    //  getTable() {
+    //   let that = this;
+    //   this.$axios({
+    //     method: "get",
+    //     url: "/visitor/list",
+    //   })
+    //     .then((response) => {
+    //       console.log(response.data.data);
+    //       if (response.data.code === 10001) {
+    //         that.users = response.data.data;
+    //       }
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+    // },
+    edit_guest(user) {
+      // const axios = require("axios");
+      console.log(user);
+      this.form = user;
+      console.log(this.form.value);
+      this.dialogFormVisible = true;
+      // axios
+      //   .put("http://60.205.247.119:8080/visit-sys/visitor/update", {
+      //     visitor: this.user,
+      //     identification: this.form.id_number,
+      //     visitorName: this.form.name,
+      //     telephone: this.form.telephone,
+      //     startAt: this.form.date_time1,
+      //   })
+      //   .then(function (response) {
+      //     console.log(response);
+      //   })
+      //   .catch(function (error) {
+      //     console.log(error);
+      //   });
     },
 
-    async created() {
-      const axios = require("axios");
-      let that = this;
-      axios
-        .get("http://60.205.247.119:8080/visit-sys/visitor/list", {
-          params: {},
-        })
-        .then(function (response) {
-          console.log(response.data.data);
-          if (response.data.code == 10001) {
-            that.users = that.users.concat(response.data.data);
-          }
-        })
-        .catch(function (error) {
-          console.log(error);
-        })
-        .then(function () {
-          // always executed
-        });
-    },
-    editGuest() {
-      const axios = require("axios");
-      axios
-        .put("http://60.205.247.119:8080/visit-sys/visitor/update ", {
-          visitor: this.user,
-          identification: this.form.id_number,
-          visitorName: this.form.name,
-          telephone: this.form.telephone,
-          startAt: this.form.date_time1,
-        })
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    },
-
-    remove(index, rows) {
-      const axios = require("axios");
-      axios
-        .delete("http://60.205.247.119:8080/visit-sys/visitor/del", {})
-        .then(function (response) {
-          console.log(response);
-          rows.splice(index, 1);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    },
+    // deleteRow(index, rows) {
+    //   const axios = require("axios");
+    //   axios
+    //     .delete("http://60.205.247.119:8080/visit-sys/visitor/del", {})
+    //     .then(function (response) {
+    //       console.log(response);
+    //       rows.splice(index, 1);
+    //     })
+    //     .catch(function (error) {
+    //       console.log(error);
+    //     });
+    // },
+  },
+  created() {
+    const axios = require("axios");
+    let that = this;
+    axios
+      .get("http://60.205.247.119:8080/visit-sys/visitor/list", {})
+      .then(function (response) {
+        console.log(response);
+        if (response.data.code == 10001) {
+          that.users = that.users.concat(response.data.data);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });
   },
 };
 </script>
