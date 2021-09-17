@@ -55,7 +55,7 @@
                   <el-input
                     v-model="form.identification"
                     autocomplete="on"
-                    clearable="true"
+                    clearable=true
                   ></el-input>
                 </el-form-item>
 
@@ -64,16 +64,18 @@
                   <el-date-picker
                     v-model="form.startAt"
                     type="datetime"
+                    format="timestamp"
                     placeholder="选择日期和时间"
-                    clearable="true"
+                    clearable=true
                   >
                   </el-date-picker>
                   <span class="demonstration2">结束时间</span>
                   <el-date-picker
                     v-model="form.endAt"
                     type="datetime"
+                    format="timestamp"
                     placeholder="选择日期和时间"
-                    clearable="true"
+                    clearable=true
                   >
                   </el-date-picker>
                 </div>
@@ -83,7 +85,7 @@
                     v-model.number="form.mobile"
                     autocomplete="off"
                     type="number"
-                    clearable="true"
+                    clearable=true
                   ></el-input>
                 </el-form-item>
               </el-form>
@@ -175,7 +177,7 @@ export default {
       axios
         .get("http://60.205.247.119:8080/visit-sys/visitor/list", {})
         .then(function (response) {
-          console.log(response);
+          // console.log(response);
           if (response.data.code == 10001) {
             that.users = that.users.concat(response.data.data);
           }
@@ -189,28 +191,29 @@ export default {
     },
 
     add_guest(form) {
-      console.log(form);
+      // console.log(form);
       this.users.push(form);
       const axios = require("axios");
       let that = this;
       axios
-        .post("http://60.205.247.119:8080/visit-sys/visit-sys/visitor/save", {
-          checkInRecord: this.checkInRecord,
-          visitorName: this.form.visitorName,
-          identification: this.form.id_number,
-          startAt: this.form.startAt,
-          endAt: this.form.endAt,
-          mobile: this.form.mobile,
+        .post("http://60.205.247.119:8080/visit-sys/visitor/save", {
+          visitor: this.form,
+          // visitorName: this.form.visitorName,
+          // identification: this.form.id_number,
+          // startAt: this.form.startAt,
+          // endAt: this.form.endAt,
+          // mobile: this.form.mobile,
         })
         .then(function (response) {
           console.log(response);
           that.users = that.users.concat(response.data.data); //Users array already exist with data in, so it'll add new data in and insert in the database on the server side
+          // that.initData();
         })
         .catch(function (error) {
           console.log(error);
         });
       this.dialogFormVisible = false;
-      this.initData(); //Call back the function  and display the new list of users
+      // this.initData(); //Call back the function  and display the new list of users
     },
     //  getTable() {
     //   let that = this;
@@ -230,7 +233,7 @@ export default {
     // },
 
     edit_guest(user) {
-      console.log(user);
+      // console.log(user);
       this.form = user;
       console.log(this.form.value);
       this.dialogFormVisible = true;
