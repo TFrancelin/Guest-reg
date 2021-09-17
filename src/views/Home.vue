@@ -55,7 +55,7 @@
                   <el-input
                     v-model="form.identification"
                     autocomplete="on"
-                    clearable=true
+                    clearable="true"
                   ></el-input>
                 </el-form-item>
 
@@ -66,7 +66,7 @@
                     type="datetime"
                     format="timestamp"
                     placeholder="选择日期和时间"
-                    clearable=true
+                    clearable="true"
                   >
                   </el-date-picker>
                   <span class="demonstration2">结束时间</span>
@@ -75,7 +75,7 @@
                     type="datetime"
                     format="timestamp"
                     placeholder="选择日期和时间"
-                    clearable=true
+                    clearable="true"
                   >
                   </el-date-picker>
                 </div>
@@ -85,7 +85,7 @@
                     v-model.number="form.mobile"
                     autocomplete="off"
                     type="number"
-                    clearable=true
+                    clearable="true"
                   ></el-input>
                 </el-form-item>
               </el-form>
