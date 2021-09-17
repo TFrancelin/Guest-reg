@@ -163,7 +163,31 @@ export default {
       checkInRecord: "",
     };
   },
+
+  created() {
+    this.initData();
+  },
+
   methods: {
+    initData() {
+      const axios = require("axios");
+      let that = this;
+      axios
+        .get("http://60.205.247.119:8080/visit-sys/visitor/list", {})
+        .then(function (response) {
+          console.log(response);
+          if (response.data.code == 10001) {
+            that.users = that.users.concat(response.data.data);
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
+        .then(function () {
+          // always executed
+        });
+    },
+
     add_guest(form) {
       console.log(form);
       this.users.push(form);
@@ -180,12 +204,13 @@ export default {
         })
         .then(function (response) {
           console.log(response);
-          that.users = response.data.data;
+          that.users = that.users.concat(response.data.data);
         })
         .catch(function (error) {
           console.log(error);
         });
       this.dialogFormVisible = false;
+      this.initData();
     },
     //  getTable() {
     //   let that = this;
@@ -239,24 +264,6 @@ export default {
     //       console.log(error);
     //     });
     // },
-  },
-  created() {
-    const axios = require("axios");
-    let that = this;
-    axios
-      .get("http://60.205.247.119:8080/visit-sys/visitor/list", {})
-      .then(function (response) {
-        console.log(response);
-        if (response.data.code == 10001) {
-          that.users = that.users.concat(response.data.data);
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
-      .then(function () {
-        // always executed
-      });
   },
 };
 </script>
