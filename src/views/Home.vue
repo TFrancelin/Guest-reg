@@ -48,14 +48,14 @@
                   <el-input
                     v-model="form.visitorName"
                     autocomplete="on"
-                    clearable="true"
+                    clearable=true
                   ></el-input>
                 </el-form-item>
                 <el-form-item label="身份证号" :label-width="formLabelWidth">
                   <el-input
                     v-model="form.identification"
                     autocomplete="on"
-                    clearable="true"
+                    clearable=true
                   ></el-input>
                 </el-form-item>
 
@@ -70,7 +70,7 @@
                       type="datetime"
                       format="timestamp"
                       placeholder="选择日期和时间"
-                      clearable="true"
+                      clearable=true
                     >
                     </el-date-picker>
                   </el-form-item>
@@ -85,7 +85,7 @@
                       type="datetime"
                       format="timestamp"
                       placeholder="选择日期和时间"
-                      clearable="true"
+                      clearable=true
                     >
                     </el-date-picker>
                   </el-form-item>
@@ -96,7 +96,7 @@
                     v-model.number="form.mobile"
                     autocomplete="off"
                     type="number"
-                    clearable="true"
+                    clearable=true
                   ></el-input>
                 </el-form-item>
               </el-form>
@@ -188,7 +188,7 @@ export default {
       axios
         .get("http://60.205.247.119:8080/visit-sys/visitor/list", {})
         .then(function (response) {
-          // console.log(response);
+          console.log(response);
           if (response.data.code == 10001) {
             that.users = that.users.concat(response.data.data);
           }
@@ -203,22 +203,22 @@ export default {
 
     add_guest(form) {
       // console.log(form);
-      this.users.push(form);
       const axios = require("axios");
       let that = this;
       axios
         .post("http://60.205.247.119:8080/visit-sys/visitor/save", {
-          visitor: this.form,
-          // visitorName: this.form.visitorName,
-          // identification: this.form.id_number,
-          // startAt: this.form.startAt,
-          // endAt: this.form.endAt,
-          // mobile: this.form.mobile,
+          // visitor: this.form,
+          visitorName: this.form.visitorName,
+          identification: this.form.id_number,
+          startAt: this.form.startAt,
+          endAt: this.form.endAt,
+          mobile: this.form.mobile,
         })
         .then(function (response) {
           console.log(response);
-          that.users = that.users.concat(response.data.data); //Users array already exist with data in, so it'll add new data in and insert in the database on the server side
-          // that.initData();
+          that.users.push(form);
+          // that.users = that.users.concat(response.data.data); //Users array already exist with data in, so it'll add new data in and insert in the database on the server side
+          that.initData();
         })
         .catch(function (error) {
           console.log(error);
@@ -244,10 +244,10 @@ export default {
     // },
 
     edit_guest(user) {
-      // console.log(user);
       this.form = user;
       console.log(this.form.value);
       this.dialogFormVisible = true;
+      console.log(user);
       // let that = this;
       // const axios = require("axios");
       // axios
@@ -266,18 +266,22 @@ export default {
       //   });
     },
 
-    // deleteRow(index, rows) {
-    //   const axios = require("axios");
-    //   axios
-    //     .delete("http://60.205.247.119:8080/visit-sys/visitor/del", {})
-    //     .then(function (response) {
-    //       console.log(response);
-    //       rows.splice(index, 1);
-    //     })
-    //     .catch(function (error) {
-    //       console.log(error);
-    //     });
-    // },
+    deleteRow(index, rows) {
+      const axios = require("axios");
+      let that = this;
+      axios
+        .delete("http://60.205.247.119:8080/visit-sys/visitor/del", {
+          id: this.form.identification,
+        })
+        .then(function (response) {
+          console.log(response);
+          index = that.id;
+          rows.splice(index, 1);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
   },
 };
 </script>
