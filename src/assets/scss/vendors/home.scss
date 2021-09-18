@@ -84,10 +84,24 @@
    margin-left: -25%;
    }
   .demonstration1{
-    margin-right: 15px;
-    margin-left: -4%;
+    margin-right: 25px;
+    margin-left: -10%;
   }
      .demonstration2{
     margin-right: 4%;
     margin-left: 16%;
+  }
+
+  .datepicker {
+    width: 80px;
+    display: flex;
+
+    .datetime{
+      display: block;
+      flex: 1;
+    }
+  }
+
+  .el-input__icon, .el-icon-time {
+    border: none;
   }

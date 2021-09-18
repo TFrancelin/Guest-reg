@@ -59,25 +59,36 @@
                   ></el-input>
                 </el-form-item>
 
-                <div class="block">
-                  <span class="demonstration1">开始时间</span>
-                  <el-date-picker
-                    v-model="form.startAt"
-                    type="datetime"
-                    format="timestamp"
-                    placeholder="选择日期和时间"
-                    clearable="true"
+                <div class="datepicker">
+                  <el-form-item
+                    class="datetime"
+                    label="开始时间"
+                    :label-width="formLabelWidth"
                   >
-                  </el-date-picker>
-                  <span class="demonstration2">结束时间</span>
-                  <el-date-picker
-                    v-model="form.endAt"
-                    type="datetime"
-                    format="timestamp"
-                    placeholder="选择日期和时间"
-                    clearable="true"
+                    <el-date-picker
+                      v-model="form.startAt"
+                      type="datetime"
+                      format="timestamp"
+                      placeholder="选择日期和时间"
+                      clearable="true"
+                    >
+                    </el-date-picker>
+                  </el-form-item>
+
+                  <el-form-item
+                    class="datetime"
+                    label="结束时间"
+                    :label-width="formLabelWidth"
                   >
-                  </el-date-picker>
+                    <el-date-picker
+                      v-model="form.endAt"
+                      type="datetime"
+                      format="timestamp"
+                      placeholder="选择日期和时间"
+                      clearable="true"
+                    >
+                    </el-date-picker>
+                  </el-form-item>
                 </div>
 
                 <el-form-item label="手机号码" :label-width="formLabelWidth">
@@ -160,7 +171,7 @@ export default {
         mobile: "",
       },
 
-      formLabelWidth: "120px",
+      formLabelWidth: "140px",
       id: "",
       checkInRecord: "",
     };
