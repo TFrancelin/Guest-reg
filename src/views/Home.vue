@@ -1,5 +1,10 @@
 <template>
-  <div class="home">
+<div class="home">
+  <el-input class="search_bar"
+  placeholder="搜索信息"
+  v-model="input"
+  clearable>
+</el-input>
     <div class="container">
       <el-container style="height: 500px">
         <el-aside
@@ -161,6 +166,7 @@ export default {
   components: {},
   data() {
     return {
+      input: '',
       users: [],
       dialogFormVisible: false,
       form: {
@@ -171,7 +177,6 @@ export default {
         mobile: "",
         type: "create",
       },
-
       formLabelWidth: "140px",
       checkInRecord: "",
     };
