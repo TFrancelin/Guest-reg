@@ -48,14 +48,14 @@
                   <el-input
                     v-model="form.visitorName"
                     autocomplete="on"
-                    clearable=true
+                    clearable="true"
                   ></el-input>
                 </el-form-item>
                 <el-form-item label="身份证号" :label-width="formLabelWidth">
                   <el-input
                     v-model="form.identification"
                     autocomplete="on"
-                    clearable=true
+                    clearable="true"
                   ></el-input>
                 </el-form-item>
 
@@ -70,7 +70,7 @@
                       type="datetime"
                       format="timestamp"
                       placeholder="选择日期和时间"
-                      clearable=true
+                      clearable="true"
                     >
                     </el-date-picker>
                   </el-form-item>
@@ -85,7 +85,7 @@
                       type="datetime"
                       format="timestamp"
                       placeholder="选择日期和时间"
-                      clearable=true
+                      clearable="true"
                     >
                     </el-date-picker>
                   </el-form-item>
@@ -96,7 +96,7 @@
                     v-model.number="form.mobile"
                     autocomplete="off"
                     type="number"
-                    clearable=true
+                    clearable="true"
                   ></el-input>
                 </el-form-item>
               </el-form>
@@ -169,10 +169,10 @@ export default {
         startAt: "",
         endAt: "",
         mobile: "",
+        type: "create",
       },
 
       formLabelWidth: "140px",
-      id: "",
       checkInRecord: "",
     };
   },
@@ -190,7 +190,7 @@ export default {
         .then(function (response) {
           console.log(response);
           if (response.data.code == 10001) {
-            that.users = that.users.concat(response.data.data);
+            that.users = response.data.data;
           }
         })
         .catch(function (error) {
@@ -201,7 +201,7 @@ export default {
         });
     },
 
-    add_guest(form) {
+    add_guest() {
       // console.log(form);
       const axios = require("axios");
       let that = this;
@@ -214,9 +214,10 @@ export default {
           endAt: this.form.endAt,
           mobile: this.form.mobile,
         })
-        .then(function (response) {
+        .then((response) => {
           console.log(response);
-          that.users.push(form);
+          // that.users.push(form);
+          // that.users = that.users.concat(that.users);
           // that.users = that.users.concat(response.data.data); //Users array already exist with data in, so it'll add new data in and insert in the database on the server side
           that.initData();
         })
@@ -245,14 +246,15 @@ export default {
 
     edit_guest(user) {
       this.form = user;
-      console.log(this.form.value);
+      console.log(this.form);
       this.dialogFormVisible = true;
-      console.log(user);
+      
+      // console.log(user);
       // let that = this;
       // const axios = require("axios");
       // axios
       //   .put("http://60.205.247.119:8080/visit-sys/visitor/update", {
-      //     visitor: this.user,
+      //     visitor: this.form,
       //     identification: this.form.id_number,
       //     visitorName: this.form.name,
       //     telephone: this.form.telephone,
@@ -263,20 +265,25 @@ export default {
       //   })
       //   .catch(function (error) {
       //     console.log(error);
-      //   });
+        // });
     },
 
-    deleteRow(index, rows) {
+    deleteRow() {
       const axios = require("axios");
-      let that = this;
+      // let that = this;
+      // rows.splice(index, 1);
+      const sendData = new FormData();
+      sendData.append("id", this.form.identification);
       axios
-        .delete("http://60.205.247.119:8080/visit-sys/visitor/del", {
-          id: this.form.identification,
-        })
+        .delete("http://60.205.247.119:8080/visit-sys/visitor/del",
+          JSON.stringify(sendData)
+        )
         .then(function (response) {
           console.log(response);
-          index = that.id;
-          rows.splice(index, 1);
+          // that.form.identififcation = index;
+          // console.log(index);
+          // that.users.concat(rows);
+          // console.log(rows);
         })
         .catch(function (error) {
           console.log(error);
