@@ -1,10 +1,12 @@
 <template>
-<div class="home">
-  <el-input class="search_bar"
-  placeholder="搜索信息"
-  v-model="input"
-  clearable>
-</el-input>
+  <div class="home">
+    <el-input
+      class="search_bar"
+      placeholder="搜索信息"
+      v-model="input"
+      clearable
+    >
+    </el-input>
     <div class="container">
       <el-container style="height: 500px">
         <el-aside
@@ -73,7 +75,6 @@
                     <el-date-picker
                       v-model="form.startAt"
                       type="datetime"
-                      format="timestamp"
                       placeholder="选择日期和时间"
                       clearable="true"
                     >
@@ -88,7 +89,6 @@
                     <el-date-picker
                       v-model="form.endAt"
                       type="datetime"
-                      format="timestamp"
                       placeholder="选择日期和时间"
                       clearable="true"
                     >
@@ -145,7 +145,7 @@
                       style="color: red"
                       type="text"
                       size="small"
-                      @click.native.prevent="deleteRow(scope.$index, users)"
+                      @click.native.prevent="deleteRow(scope.$index, scope.row)"
                       >删除</el-button
                     >
                   </template>
@@ -166,16 +166,27 @@ export default {
   components: {},
   data() {
     return {
-      input: '',
+      input: "",
       users: [],
       dialogFormVisible: false,
       form: {
         visitorName: "",
         identification: "",
-        startAt: "",
-        endAt: "",
+        startAt: 0,
+        endAt: 0,
         mobile: "",
-        type: "create",
+        approver: "",
+        approverId: "",
+        content: "",
+        createdAt: 0,
+        face_token: "",
+        faceset: "",
+        id: "",
+        imgUrl: "",
+        staff: "",
+        staffId: "",
+        visitorCompany: "",
+        // type: "create",
       },
       formLabelWidth: "140px",
       checkInRecord: "",
@@ -190,12 +201,15 @@ export default {
     initData() {
       const axios = require("axios");
       let that = this;
+      // that.startAt = new Date('2014-05-10 13:25:50').getTime();
+      // console.log(that.startAt);
       axios
         .get("http://60.205.247.119:8080/visit-sys/visitor/list", {})
         .then(function (response) {
           console.log(response);
           if (response.data.code == 10001) {
             that.users = response.data.data;
+            console.log(that.users);
           }
         })
         .catch(function (error) {
@@ -207,22 +221,36 @@ export default {
     },
 
     add_guest() {
-      // console.log(form);
+      console.log(this.form);
       const axios = require("axios");
       let that = this;
+      that.form.startAt = new Date(this.form.startAt).getTime();
+      console.log(that.form.startAt);
+      that.form.endAt = new Date(this.form.endAt).getTime();
+      // console.log(that.form.endtAt);
       axios
         .post("http://60.205.247.119:8080/visit-sys/visitor/save", {
-          // visitor: this.form,
-          visitorName: this.form.visitorName,
-          identification: this.form.id_number,
-          startAt: this.form.startAt,
-          endAt: this.form.endAt,
-          mobile: this.form.mobile,
+          identification: that.form.identification,
+          startAt: that.form.startAt,
+          endAt: that.form.endAt,
+          mobile: that.form.mobile,
+          approver: "",
+          approverId: "",
+          content: "",
+          createdAt: 0,
+          face_token: "",
+          faceset: "",
+          id: "",
+          imgUrl: "",
+          staff: "",
+          staffId: "",
+          visitorCompany: "",
+          visitorName: that.form.visitorName,
         })
         .then((response) => {
           console.log(response);
-          // that.users.push(form);
-          // that.users = that.users.concat(that.users);
+          console.log(that.form);
+          that.users.concat(that.users.push(this.form));
           // that.users = that.users.concat(response.data.data); //Users array already exist with data in, so it'll add new data in and insert in the database on the server side
           that.initData();
         })
@@ -253,7 +281,7 @@ export default {
       this.form = user;
       console.log(this.form);
       this.dialogFormVisible = true;
-      
+
       // console.log(user);
       // let that = this;
       // const axios = require("axios");
@@ -270,29 +298,31 @@ export default {
       //   })
       //   .catch(function (error) {
       //     console.log(error);
-        // });
+      // });
     },
 
-    deleteRow() {
+    deleteRow(index, user) {
       const axios = require("axios");
-      // let that = this;
-      // rows.splice(index, 1);
-      const sendData = new FormData();
-      sendData.append("id", this.form.identification);
+      let that = this;
+      // const sendData = new FormData();
+      // sendData.append("id", this.form.identification);
+      console.log(user);
       axios
-        .delete("http://60.205.247.119:8080/visit-sys/visitor/del",
-          JSON.stringify(sendData)
-        )
+        .delete("http://60.205.247.119:8080/visit-sys/visitor/del?id="+user.id)
         .then(function (response) {
           console.log(response);
-          // that.form.identififcation = index;
+          // console.log(that.users);
+          // console.log(that.form.id);
+          that.users.splice(index, 1);
+          console.log(user.id);
+          // that.form.identification = index;
           // console.log(index);
-          // that.users.concat(rows);
           // console.log(rows);
         })
         .catch(function (error) {
           console.log(error);
         });
+      // that.users = new that.users;
     },
   },
 };
