@@ -1,12 +1,5 @@
 <template>
   <div class="home">
-    <el-input
-      class="search_bar"
-      placeholder="搜索信息"
-      v-model="input"
-      clearable
-    >
-    </el-input>
     <div class="container">
       <el-container style="height: 500px">
         <el-aside
@@ -33,8 +26,18 @@
             class="guest-nav"
             style="text-align: right; font-size: 12px"
           >
-            <!-- Drop-down options-->
-            <el-dropdown>
+         
+           
+            
+               <el-input
+                   class="search_bar"
+                   placeholder="搜索信息"
+                    v-model="input"
+                   clearable>
+              </el-input>
+                   <!-- Drop-down options-->
+
+               <el-dropdown>
               <i class="el-icon-setting" style="margin-right: 15px"></i>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item>背影</el-dropdown-item>
