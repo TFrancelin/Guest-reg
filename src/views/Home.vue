@@ -26,18 +26,16 @@
             class="guest-nav"
             style="text-align: right; font-size: 12px"
           >
-         
-           
-            
-               <el-input
-                   class="search_bar"
-                   placeholder="搜索信息"
-                    v-model="input"
-                   clearable>
-              </el-input>
-                   <!-- Drop-down options-->
+            <el-input
+              class="search_bar"
+              placeholder="搜索信息"
+              v-model="search"
+              clearable
+            >
+            </el-input>
+            <!-- Drop-down options-->
 
-               <el-dropdown>
+            <el-dropdown>
               <i class="el-icon-setting" style="margin-right: 15px"></i>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item>背影</el-dropdown-item>
@@ -47,10 +45,8 @@
             </el-dropdown>
 
             <!-- Add Guest Button -->
-            <el-button type="text" @click="dialogFormVisible = true"
-              >添加客人</el-button
-            >
-            <!-- DialogBox with form in where to fill each user information -->
+            <el-button type="text" @click="add_guest_btn">添加客人</el-button>
+            <!-- DialogBox with form in which to fill each user information -->
             <el-dialog title="" :visible.sync="dialogFormVisible">
               <h2 class="dialog_header" align="center">请添加你的信息</h2>
               <el-form :model="form">
@@ -111,7 +107,7 @@
 
               <!-- Cancel and confirm buttons at the dialogBox footer -->
               <span slot="footer" class="dialog-footer">
-                <el-button @click="dialogFormVisible = false">取消</el-button>
+                <el-button @click="cancel">取消</el-button>
                 <el-button type="primary" @click="add_guest(form)"
                   >确认</el-button
                 >
@@ -122,7 +118,21 @@
           <!-- table with users info per row, and each row with edit and delete buttons -->
           <el-main>
             <div class="demo-input-size">
-              <el-table :data="users" style="width: 100%">
+              <el-table
+                :data="
+                  users.filter(
+                    (data) =>
+                      !search ||
+                      data.visitorName
+                        .toLowerCase()
+                        .includes(search.toLowerCase()) ||
+                      data.identification
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                  )
+                "
+                style="width: 100%"
+              >
                 <el-table-column
                   prop="visitorName"
                   label="名字"
@@ -169,7 +179,7 @@ export default {
   components: {},
   data() {
     return {
-      input: "",
+      search: "",
       users: [],
       dialogFormVisible: false,
       form: {
@@ -191,9 +201,35 @@ export default {
         visitorCompany: "",
         // type: "create",
       },
+      form1: {
+        visitorName: "",
+        identification: "",
+        startAt: 0,
+        endAt: 0,
+        mobile: "",
+        approver: "",
+        approverId: "",
+        content: "",
+        createdAt: 0,
+        face_token: "",
+        faceset: "",
+        id: "",
+        imgUrl: "",
+        staff: "",
+        staffId: "",
+        visitorCompany: "",
+        // type: "create",
+      },
       formLabelWidth: "140px",
       checkInRecord: "",
     };
+  },
+
+  validations: {
+    identification: {
+      required: true,
+      minLength: 18,
+    },
   },
 
   created() {
@@ -223,6 +259,15 @@ export default {
         });
     },
 
+    add_guest_btn() {
+      this.form.identification = "";
+      this.form.startAt = "";
+      this.form.endAt = "";
+      this.form.mobile = "";
+      this.form.visitorName = "";
+      this.dialogFormVisible = true;
+    },
+
     add_guest() {
       console.log(this.form);
       const axios = require("axios");
@@ -230,7 +275,6 @@ export default {
       that.form.startAt = new Date(this.form.startAt).getTime();
       console.log(that.form.startAt);
       that.form.endAt = new Date(this.form.endAt).getTime();
-      // console.log(that.form.endtAt);
       axios
         .post("http://60.205.247.119:8080/visit-sys/visitor/save", {
           identification: that.form.identification,
@@ -261,71 +305,71 @@ export default {
           console.log(error);
         });
       this.dialogFormVisible = false;
-      // this.initData(); //Call back the function  and display the new list of users
     },
-    //  getTable() {
-    //   let that = this;
-    //   this.$axios({
-    //     method: "get",
-    //     url: "/visitor/list",
-    //   })
-    //     .then((response) => {
-    //       console.log(response.data.data);
-    //       if (response.data.code === 10001) {
-    //         that.users = response.data.data;
-    //       }
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
+
+    cancel() {
+      this.form = this.form1;
+      this.dialogFormVisible = false;
+    },
+
+    // validateNumber: (event) => {
+    //   let keyCode = event.keyCode;
+    //   if (keyCode < 48 || keyCode > 57) {
+    //     event.preventDefault();
+    //   }
+    //   console.log(keyCode);
     // },
 
     edit_guest(user) {
-      this.form = user;
-      console.log(this.form);
       this.dialogFormVisible = true;
-
+      this.form = user;
+      // console.log(this.form);
       // console.log(user);
-      // let that = this;
-      // const axios = require("axios");
-      // axios
-      //   .put("http://60.205.247.119:8080/visit-sys/visitor/update", {
-      //     visitor: this.form,
-      //     identification: this.form.id_number,
-      //     visitorName: this.form.name,
-      //     telephone: this.form.telephone,
-      //     startAt: this.form.date_time1,
-      //   })
-      //   .then(function (response) {
-      //     console.log(response);
-      //   })
-      //   .catch(function (error) {
-      //     console.log(error);
-      // });
+      let that = this;
+      const axios = require("axios");
+      axios
+        .put("http://60.205.247.119:8080/visit-sys/visitor/update", {
+          identification: that.form.identification,
+          startAt: that.form.startAt,
+          endAt: that.form.endAt,
+          mobile: that.form.mobile,
+          approver: "",
+          approverId: "",
+          content: "",
+          createdAt: 0,
+          face_token: "",
+          faceset: "",
+          id: "",
+          imgUrl: "",
+          staff: "",
+          staffId: "",
+          visitorCompany: "",
+          visitorName: that.form.visitorName,
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     },
 
     deleteRow(index, user) {
       const axios = require("axios");
       let that = this;
-      // const sendData = new FormData();
-      // sendData.append("id", this.form.identification);
       console.log(user);
       axios
-        .delete("http://60.205.247.119:8080/visit-sys/visitor/del?id="+user.id)
+        .delete(
+          "http://60.205.247.119:8080/visit-sys/visitor/del?id=" + user.id
+        )
         .then(function (response) {
           console.log(response);
-          // console.log(that.users);
-          // console.log(that.form.id);
           that.users.splice(index, 1);
           console.log(user.id);
-          // that.form.identification = index;
-          // console.log(index);
-          // console.log(rows);
         })
         .catch(function (error) {
           console.log(error);
         });
-      // that.users = new that.users;
     },
   },
 };
