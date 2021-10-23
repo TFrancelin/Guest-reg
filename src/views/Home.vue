@@ -326,7 +326,12 @@ export default {
       checkInRecord: "",
       rules: {
         mobile: [
-          { min: 11, max: 11, message: "手机号不能小或大于11位", trigger: "blur" },
+          {
+            min: 11,
+            max: 11,
+            message: "手机号不能小或大于11位",
+            trigger: "blur",
+          },
         ],
         identification: [
           {
