@@ -1,7 +1,7 @@
 <template style="background-image: url(https://pixy.org/src/480/4800346.jpg)">
   <div id="app">
     <div id="nav">
-      <router-link to="/"><h1>Home</h1> </router-link>
+      <router-link to="/"><h1>Home</h1></router-link>
     </div>
     <router-view />
   </div>
